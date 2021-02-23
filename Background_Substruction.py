@@ -4,7 +4,7 @@ import numpy as np
 
 dilation_kernel = np.ones((20,20),np.uint8)
 kernel = cv.getStructuringElement(cv.MORPH_ELLIPSE, (3,3))
-fbgb = cv.BackgroundSubtractor()
+fbgb = cv.createBackgroundSubtractorKNN()
 cap = cv.VideoCapture(0)
 
 while True:
