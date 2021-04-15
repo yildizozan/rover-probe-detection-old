@@ -1,7 +1,7 @@
 import numpy as np
 import cv2 as cv
 
-cap = cv.VideoCapture("test_vids/IMG_9350.MOV")
+cap = cv.VideoCapture("test_vids/IMG_9344.MOV")
 if not cap.isOpened():
     print("Cannot open camera")
     exit()
@@ -12,11 +12,10 @@ while True:
     if not ret:
         print("Can't receive frame (stream end?). Exiting ...")
         break
-        
-    gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+
+    blur = cv.GaussianBlur(frame, (7, 7), 0)
+    gray = cv.cvtColor(blur, cv.COLOR_BGR2GRAY)
     dst = cv.equalizeHist(gray)
-    temp = cv.cvtColor(dst, cv.COLOR_GRAY2BGR)
-    blur = cv.GaussianBlur(temp, (5, 5), 0)
     hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
 
     mask = cv.inRange(hsv, (25, 100, 100), (100, 255, 255))
